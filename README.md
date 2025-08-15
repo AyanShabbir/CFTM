@@ -1,35 +1,84 @@
 Migrate Mate – Subscription Cancellation Flow
-
 Overview
-This project manages user profiles and subscription cancellations for Migrate Mate using Next.js, React, TailwindCSS, and Supabase.
 
-Originally, the project provided a Figma-designed cancellation flow and basic Supabase setup. We implemented and fixed several issues to make it fully functional.
+This project handles user profiles and subscription cancellations for Migrate Mate using Next.js, React, TailwindCSS, and Supabase.
 
-Key Changes and Improvements
-Profile Page Fixes
-Correctly fetches and displays user email and subscription details from Supabase.
-Added loading states to prevent empty fields while data is loading.
-Cancellation Flow Updates
+We extended the original Figma-based flow into a fully functional 3-step cancellation modal, fixed bugs, added A/B testing, and improved user experience.
+
+Key Features & Changes
+1. Profile Page
+
+Fetches and displays user email and subscription details correctly from Supabase.
+
+Added loading indicators while data is being fetched.
+
+Handles subscription status and next payment dates dynamically.
+
+2. Cancellation Flow
 
 Fully functional 3-step modal:
-Ask user for cancellation reason
-Show A/B offer (discount) if applicable
-Confirm cancellation and update subscription
-Applied cryptographically secure random variant picker (A/B testing) and persisted the variant to Supabase.
-Fixed all React hook errors and TypeScript props issues.
-Supabase Integration
-Queries for user, subscription, and cancellation records are now reliable.
-Implemented create/update logic for cancellations and pending cancellations.
-Ensured data persistence for all user actions.
 
-UX Improvements
-Added Back/Close buttons and smooth step transitions.
-Improved error handling with console logs for easier debugging.
-Loading indicators show while fetching data.
-Code Quality
-Cleaned up hooks and component structure.
-Centralized API logic for cancellation and discount handling.
-Added proper TypeScript types across all components.
+Ask user for cancellation reason
+
+Show A/B offer (50% off) if applicable
+
+Final confirmation to cancel
+
+Implemented cryptographically secure A/B testing:
+
+Variant B shows the downsell offer.
+
+Variant A skips the offer.
+
+Variant assignment persists for the user in Supabase.
+
+Step navigation: Back, Close, and dynamic step handling.
+
+Progress bar shows current step of the flow.
+
+Offers accept/decline actions with discount logic simulated.
+
+3. Supabase Integration
+
+Fetch and persist user, subscription, and cancellation data.
+
+Update subscription to pending cancellation if canceled.
+
+Store cancellation details:
+
+user_id, downsell_variant, reason, accepted_downsell, created_at.
+
+Applied error handling for all API calls.
+
+4. UX Improvements
+
+Smooth step transitions and modals for mobile & desktop.
+
+Styled offer card with discount details and action buttons.
+
+Loading states for actions like discount application and cancellation.
+
+Clear feedback to user after cancellation or offer acceptance.
+
+5. Code Quality
+
+Centralized API logic for cancellation and discount.
+
+Fully typed with TypeScript for safety.
+
+Modular components for Step1, Step2, Step3 and ProgressBar.
+
+Improved React hooks usage to avoid common warnings/errors.
+
+Tech Stack
+
+Next.js with App Router
+
+React with TypeScript
+
+Tailwind CSS
+
+Supabase (Postgres + Row-Level Security)
 
 Setup
 Clone the repo:
